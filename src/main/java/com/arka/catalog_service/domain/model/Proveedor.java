@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Proveedor {
-    private Integer id;
+    private Long id;
     private String nombre;
     private String telefono;
     private String caracteristicas;

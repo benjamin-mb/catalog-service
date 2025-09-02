@@ -8,12 +8,12 @@ import java.util.Optional;
 
 public interface CategoriaGateway {
     Categorias create(Categorias categoria);
-    Optional<Categorias> findById(Integer id);
+    Optional<Categorias> findById(Long id);
     Optional<Categorias> findByNombre(String nombre);
     Optional<List<Categorias>>findAllByTipo(String tipo);
     List<Categorias>findAll();
     Boolean existsByNombre(String nombre);
-    Boolean existsById(Integer id);
+    Boolean existsById(Long id);
     Categorias updateCategoria(Categorias categoria);
-    Categorias deleteById(Integer id);
+    Categorias deleteById(Long id);
 }

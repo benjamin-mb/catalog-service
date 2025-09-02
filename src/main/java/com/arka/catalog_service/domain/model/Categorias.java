@@ -9,7 +9,7 @@ import java.util.HashSet;
 @NoArgsConstructor
 @Data
 public class Categorias {
-    private Integer id;
+    private Long id;
     private String nombre;
     private String caracteristicas;
     private String tipo;

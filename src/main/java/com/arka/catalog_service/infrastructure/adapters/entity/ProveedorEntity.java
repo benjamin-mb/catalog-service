@@ -10,7 +10,7 @@ public class ProveedorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_proveedor")
-    private Integer id;
+    private Long id;
 
     @Column(length = 100, nullable = false,unique = true)
     private String nombre;

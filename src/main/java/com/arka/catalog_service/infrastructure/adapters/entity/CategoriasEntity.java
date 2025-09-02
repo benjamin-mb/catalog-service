@@ -2,17 +2,19 @@ package com.arka.catalog_service.infrastructure.adapters.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "categorias")
 @Data
+@NoArgsConstructor
 public class CategoriasEntity {
     @Column(name = "id_categoria")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, unique = true,length = 100)
     private String nombre;

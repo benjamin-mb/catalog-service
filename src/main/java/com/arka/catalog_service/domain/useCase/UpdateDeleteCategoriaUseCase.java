@@ -45,7 +45,7 @@ public class UpdateDeleteCategoriaUseCase {
         return categoriaGateway.updateCategoria(categoriaUpdated);
     }
 
-    public Categorias deleteById(Integer id){
+    public Categorias deleteById(Long id){
         Categorias categoriaToDelete=categoriaGateway.findById(id)
                 .orElseThrow(()->new CategoriaNotFoundExceptions("category has not been found with id:"+id));
 

@@ -23,10 +23,10 @@ public class PostProductUseCase {
             throw new IllegalArgumentException(producto.getId()+"is already register on another product");
         }
 
-        Categorias categoria=categoriaGateway.findById(producto.getCategoria().getId())
-                .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria().getId()));
+        Categorias categoria=categoriaGateway.findById(producto.getCategoria())
+                .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria()));
 
-        if(productoGateway.existsByNombreAndCategoria(producto.getNombre(),producto.getCategoria().getId())){
+        if(productoGateway.existsByNombreAndCategoria(producto.getNombre(),producto.getCategoria())){
             throw new IllegalArgumentException("the user already exists on the category"+producto.getCategoria().getId());
 
         }

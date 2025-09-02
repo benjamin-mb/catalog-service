@@ -8,16 +8,16 @@ import java.util.Optional;
 public interface ProductoGateway {
 
     Productos create(Productos producto);
-    Optional<Productos> findById(Integer id);
+    Optional<Productos> findById(Long id);
     Optional<Productos> findByNombre(String nombre);
     List<Productos> findAllByMarca(String marca);
-    List<Productos> findAllByCategoria(Integer categoria);
+    List<Productos> findAllByCategoria(Long categoria);
     List<Productos>findAll();
     Boolean existsByNombre(String nombre);
-    Boolean existsById(Integer id);
-    Boolean existsByNombreAndCategoria(String nombre, Integer categoria);
+    Boolean existsById(Long id);
+    Boolean existsByNombreAndCategoria(String nombre, Long categoria);
     Productos updateProduct(Productos producto);
-    Productos deleteById(Integer id);
+    Productos deleteById(Long id);
 
 
 }

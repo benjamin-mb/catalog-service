@@ -38,18 +38,18 @@ public class UpdateDeleteProductoUseCase {
             productoExiste.setStock(producto.getStock());
         }
         if (producto.getCategoria() != null) {
-            if (categoriaGateway.existsById(producto.getCategoria().getId())){
+            if (categoriaGateway.existsById(producto.getCategoria())){
                 productoExiste.setCategoria(producto.getCategoria());
             }
             else {
-                throw new IllegalArgumentException("category id" + producto.getCategoria().getId() + "do not exist");
+                throw new IllegalArgumentException("category id" + producto.getCategoria() + "do not exist");
             }
         }
 
         return productoGateway.updateProduct(productoExiste);
     }
 
-    public Productos delete(Integer id){
+    public Productos delete(Long id){
 
         Productos productoEliminar=productoGateway.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("No product has been found with id:"+id));

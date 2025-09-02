@@ -7,16 +7,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Productos {
-    private Integer id;
+    private Long id;
     private String nombre;
     private Integer precio;
     private Integer stock;
     private String caracteristicas;
     private String marca;
-    private Categorias categoria;
-    private Proveedor proveedor;
+    private Long categoria;
+    private Long proveedor;
 
-    public Productos(String nombre,Integer precio, Integer stock, String caracteristicas, String marca, Categorias categoria, Proveedor proveedor) {
+    public Productos(String nombre,Integer precio, Integer stock, String caracteristicas, String marca, Long categoria, Long proveedor) {
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;

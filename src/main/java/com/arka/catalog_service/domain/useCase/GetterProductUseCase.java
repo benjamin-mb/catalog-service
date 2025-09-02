@@ -14,7 +14,7 @@ public class GetterProductUseCase {
         this.productoGateway = productoGateway;
     }
 
-    public Productos getById(Integer id){
+    public Productos getById(Long id){
         return productoGateway.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("product with id:"+id+" was not found"));
 
@@ -34,8 +34,8 @@ public class GetterProductUseCase {
         return  productoList;
     }
 
-    public List<Productos> getByCategoria(Categorias categoria){
-        List<Productos> productoList=productoGateway.findAllByCategoria(categoria.getId());
+    public List<Productos> getByCategoria(Long categoria){
+        List<Productos> productoList=productoGateway.findAllByCategoria(categoria);
         if (productoList.isEmpty()){
             throw new IllegalArgumentException("there are no products with that brand");
         }
