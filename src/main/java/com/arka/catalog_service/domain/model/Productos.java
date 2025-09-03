@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Productos {
     private Long id;
     private String nombre;

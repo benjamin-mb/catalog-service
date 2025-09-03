@@ -27,7 +27,7 @@ public class PostProductUseCase {
                 .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria()));
 
         if(productoGateway.existsByNombreAndCategoria(producto.getNombre(),producto.getCategoria())){
-            throw new IllegalArgumentException("the user already exists on the category"+producto.getCategoria().getId());
+            throw new IllegalArgumentException("the user already exists on the category"+producto.getCategoria());
 
         }
 
