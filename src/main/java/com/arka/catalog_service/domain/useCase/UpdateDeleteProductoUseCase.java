@@ -49,7 +49,7 @@ public class UpdateDeleteProductoUseCase {
         return productoGateway.updateProduct(productoExiste);
     }
 
-    public Productos delete(Long id){
+    public Productos delete(Integer id){
 
         Productos productoEliminar=productoGateway.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("No product has been found with id:"+id));

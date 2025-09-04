@@ -11,7 +11,7 @@ public class ReduceStockProductUseCase {
         this.productoGateway = productoGateway;
     }
 
-    public Productos reduceStock(Integer productoId,Integer cantidad){
+    public Productos reduceStock( Integer productoId,Integer cantidad){
 
         if (cantidad == null || cantidad <= 0) {
             throw new IllegalArgumentException("La cantidad a reducir debe ser mayor que 0");

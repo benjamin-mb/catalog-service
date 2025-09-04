@@ -7,17 +7,17 @@ import java.util.Optional;
 
 public interface ProductoGateway {
 
-    Productos create(Productos producto);
-    Optional<Productos> findById(Long id);
+    Productos save(Productos producto);
+    Optional<Productos> findById(Integer id);
     Optional<Productos> findByNombre(String nombre);
     List<Productos> findAllByMarca(String marca);
-    List<Productos> findAllByCategoria(Long categoria);
+    List<Productos> findAllByCategoria(Integer categoria);
     List<Productos>findAll();
     Boolean existsByNombre(String nombre);
-    Boolean existsById(Long id);
-    Boolean existsByNombreAndCategoria(String nombre, Long categoria);
+    Boolean existsById(Integer id);
+    Boolean existsByNombreAndCategoria(String nombre, Integer categoria);
     Productos updateProduct(Productos producto);
-    Productos deleteById(Long id);
+    Productos deleteById(Integer id);
 
 
 }

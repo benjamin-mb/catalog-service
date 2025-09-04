@@ -33,8 +33,11 @@ public class GetterCategoriaUseCase {
     public List<Categorias> getAllByTipo(String tipo){
         String tipoLimpio= tipo.trim();
 
-        List<Categorias> categorias=categoriaGateway.findAllByTipo(tipoLimpio)
-                .orElseThrow(()->new CategoriaNotFoundExceptions("there are no categories under that type"));
+        List<Categorias> categorias=categoriaGateway.findAllByTipo(tipoLimpio);
+        if (categorias.isEmpty()){
+            throw  new IllegalArgumentException("there are no categories with that tipo");
+        }
+
         return categorias;
     }
 

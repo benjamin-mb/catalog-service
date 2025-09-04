@@ -3,6 +3,8 @@ package com.arka.catalog_service.domain.useCase;
 import com.arka.catalog_service.domain.model.Categorias;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 
+import java.util.HashSet;
+
 public class PostCategoriaUseCase {
 
     private final CategoriaGateway categoriaGateway;

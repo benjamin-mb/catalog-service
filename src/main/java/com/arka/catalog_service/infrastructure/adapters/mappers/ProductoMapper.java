@@ -34,6 +34,7 @@ public class ProductoMapper {
     public Productos toModel(ProductosEntity productosEntity){
         if (productosEntity==null)return null;
         Productos producto=new Productos();
+        producto.setId(productosEntity.getId());
         producto.setNombre(productosEntity.getNombre());
         producto.setPrecio(productosEntity.getPrecio());
         producto.setStock(productosEntity.getStock());

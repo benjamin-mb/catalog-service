@@ -8,9 +8,9 @@ import lombok.Data;
 @Table(name = "proveedores")
 public class ProveedorEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proveedor")
-    private Long id;
+    private Integer id;
 
     @Column(length = 100, nullable = false,unique = true)
     private String nombre;

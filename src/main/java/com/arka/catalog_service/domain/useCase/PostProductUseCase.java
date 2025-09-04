@@ -4,6 +4,7 @@ import com.arka.catalog_service.domain.model.Categorias;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
+import com.arka.catalog_service.domain.model.gateway.ProvedorGateway;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -11,10 +12,12 @@ public class PostProductUseCase {
 
     private final CategoriaGateway categoriaGateway;
     private final ProductoGateway productoGateway;
+    private final ProvedorGateway proveedorGateway;
 
-    public PostProductUseCase(CategoriaGateway categoriaGateway, ProductoGateway productoGateway) {
+    public PostProductUseCase(CategoriaGateway categoriaGateway, ProductoGateway productoGateway, ProvedorGateway proveedorGateway) {
         this.categoriaGateway = categoriaGateway;
         this.productoGateway = productoGateway;
+        this.proveedorGateway = proveedorGateway;
     }
 
     public Productos create(Productos producto){
@@ -43,7 +46,20 @@ public class PostProductUseCase {
             throw new IllegalArgumentException("the product has to have a price");
         }
 
-         return productoGateway.create(producto);
+        if (producto.getCaracteristicas().isBlank() || producto.getCaracteristicas()==null){
+            throw new IllegalArgumentException("carecteristicas field can not be blank");
+        }
+
+        if (producto.getMarca().isBlank() || producto.getMarca()==null){
+            throw new IllegalArgumentException("marca field can not be blank");
+        }
+
+
+        if (!proveedorGateway.existsById(producto.getProveedor())){
+            throw new IllegalArgumentException("proveedor with id"+ producto.getProveedor()+" has not been found");
+        }
+
+        return productoGateway.save(producto);
 
     }
 }

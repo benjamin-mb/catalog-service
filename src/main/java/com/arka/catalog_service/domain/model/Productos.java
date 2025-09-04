@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Productos {
-    private Long id;
+    private Integer id;
     private String nombre;
     private Integer precio;
     private Integer stock;
     private String caracteristicas;
     private String marca;
-    private Long categoria;
-    private Long proveedor;
+    private Integer categoria;
+    private Integer proveedor;
 
-    public Productos(String nombre,Integer precio, Integer stock, String caracteristicas, String marca, Long categoria, Long proveedor) {
+    public Productos(String nombre,Integer precio, Integer stock, String caracteristicas, String marca, Integer categoria, Integer proveedor) {
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;

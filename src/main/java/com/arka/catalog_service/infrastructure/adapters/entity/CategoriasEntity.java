@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -13,8 +15,8 @@ import java.util.List;
 public class CategoriasEntity {
     @Column(name = "id_categoria")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(nullable = false, unique = true,length = 100)
     private String nombre;
@@ -32,5 +34,6 @@ public class CategoriasEntity {
         this.nombre = nombre;
         this.caracteristicas = caracteristicas;
         this.tipo = tipo;
+        this.productos=new ArrayList<>();
     }
 }

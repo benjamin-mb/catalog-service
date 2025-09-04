@@ -7,17 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductosJpaRepository extends JpaRepository<ProductosEntity,Long> {
+public interface ProductosJpaRepository extends JpaRepository<ProductosEntity,Integer> {
 
-
-    Productos create(Productos producto);
-    Optional<ProductosEntity> findById(Long id);
+    Optional<ProductosEntity> findById(Integer id);
     Optional<ProductosEntity> findByNombre(String nombre);
     List<ProductosEntity> findAllByMarca(String marca);
-    List<ProductosEntity> findAllByCategoria(Long categoria);
+    List<ProductosEntity> findAllByCategoria_id(Integer categoria);
     List<ProductosEntity>findAll();
     boolean existsByNombre(String nombre);
-    boolean existsById(Long id);
-    boolean existsByNombreAndCategoria(String nombre, Long categoria);
+    boolean existsById(Integer id);
+    boolean existsByNombreAndCategoria_Id(String nombre, Integer categoria);
 
 }

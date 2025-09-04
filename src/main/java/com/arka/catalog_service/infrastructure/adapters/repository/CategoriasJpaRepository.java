@@ -12,8 +12,9 @@ import java.util.Optional;
 public interface CategoriasJpaRepository extends JpaRepository<CategoriasEntity,Integer> {
     Optional<CategoriasEntity> findById(Integer id);
     Optional<CategoriasEntity> findByNombre(String nombre);
-    Optional<List<CategoriasEntity>>findAllByTipo(String tipo);
+    List<CategoriasEntity>findAllByTipo(String tipo);
     List<CategoriasEntity>findAll();
     Boolean existsByNombre(String nombre);
     boolean existsById(Integer id);
+    void deleteById(Integer id);
 }

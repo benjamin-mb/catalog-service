@@ -35,12 +35,12 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Productos>delete(@PathVariable Long id){
+    public ResponseEntity<Productos>delete(@PathVariable Integer id){
         return ResponseEntity.ok(productoUseCasePutDelete.delete(id));
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Productos> getById(@PathVariable Long id) {
+    public ResponseEntity<Productos> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(productUseCaseGetters.getById(id));
     }
 
@@ -55,7 +55,7 @@ public class ProductController {
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<List<Productos>> getAllByCategoria(@PathVariable Long categoria) {
+    public ResponseEntity<List<Productos>> getAllByCategoria(@PathVariable Integer categoria) {
         return ResponseEntity.ok(productUseCaseGetters.getByCategoria(categoria));
     }
 

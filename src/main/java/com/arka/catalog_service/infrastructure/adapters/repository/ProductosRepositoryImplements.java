@@ -25,14 +25,14 @@ private final ProductoMapper mapper;
     }
 
 
-    public Productos create(Productos pruducto){
+    public Productos save(Productos pruducto){
         ProductosEntity productosEntity=mapper.toEntity(pruducto);
         ProductosEntity productoSaved=repository.save(productosEntity);
         return mapper.toModel(productoSaved);
     }
 
     @Override
-    public Optional<Productos> findById(Long id) {
+    public Optional<Productos> findById(Integer id) {
         return repository.findById(id).map(mapper::toModel);
     }
 
@@ -48,8 +48,8 @@ private final ProductoMapper mapper;
     }
 
     @Override
-    public List<Productos> findAllByCategoria(Long categoria) {
-        return repository.findAllByCategoria(categoria)
+    public List<Productos> findAllByCategoria(Integer categoria) {
+        return repository.findAllByCategoria_id(categoria)
                 .stream().map(mapper::toModel)
                 .toList();
     }
@@ -67,18 +67,18 @@ private final ProductoMapper mapper;
     }
 
     @Override
-    public Boolean existsById(Long id) {
+    public Boolean existsById(Integer id) {
         return repository.existsById(id);
     }
 
     @Override
-    public Boolean existsByNombreAndCategoria(String nombre, Long categoria) {
-        return repository.existsByNombreAndCategoria(nombre,categoria);
+    public Boolean existsByNombreAndCategoria(String nombre, Integer categoria) {
+        return repository.existsByNombreAndCategoria_Id(nombre,categoria);
     }
 
     @Override
     public Productos updateProduct(Productos producto) {
-        if (repository.existsById(producto.getId())){
+        if (!repository.existsById(producto.getId())){
             throw new IllegalArgumentException("product not found to be updated");
         }
         ProductosEntity productosEntity=mapper.toEntity(producto);
@@ -87,7 +87,7 @@ private final ProductoMapper mapper;
     }
 
     @Override
-    public Productos deleteById(Long id) {
+    public Productos deleteById(Integer id) {
         ProductosEntity producto=repository.findById(id)
                         .orElseThrow(()->new  IllegalArgumentException("product not found to be deleted"));
         repository.deleteById(id);

@@ -6,15 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Table(name = "usuarios")
+@Table(name = "productos")
 @Data
 @NoArgsConstructor
 @Entity
 public class ProductosEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, unique = true,length = 70)
     private String nombre;
@@ -36,7 +36,7 @@ public class ProductosEntity {
     private ProveedorEntity proveedor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_category",referencedColumnName = "id_category")
+    @JoinColumn(name = "id_categoria",referencedColumnName = "id_categoria")
     private CategoriasEntity categoria;
 
     public ProductosEntity(String nombre, Integer precio, Integer stock, String caracteristicas, String marca, ProveedorEntity proveedor, CategoriasEntity categoria) {
