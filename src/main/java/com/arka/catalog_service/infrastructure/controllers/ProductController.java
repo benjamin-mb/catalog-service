@@ -4,14 +4,16 @@ import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.useCase.GetterProductUseCase;
 import com.arka.catalog_service.domain.useCase.PostProductUseCase;
 import com.arka.catalog_service.domain.useCase.UpdateDeleteProductoUseCase;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnCheckpointRestore;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/api/productos")
 public class ProductController {
 
     private final PostProductUseCase productUseCasePost;
@@ -40,8 +42,11 @@ public class ProductController {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Productos> getById(@PathVariable Integer id) {
-        return ResponseEntity.ok(productUseCaseGetters.getById(id));
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
+
+           Productos producto=productUseCaseGetters.getById(id);
+           return ResponseEntity.ok(producto);
+
     }
 
     @GetMapping("/nombre/{nombre}")

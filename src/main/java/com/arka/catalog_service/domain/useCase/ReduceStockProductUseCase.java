@@ -35,7 +35,8 @@ public class ReduceStockProductUseCase {
             ProductsRunningLowStock event = new ProductsRunningLowStock(
                     productoAfterSell.getId(),
                     productoAfterSell.getNombre(),
-                    productoAfterSell.getStock()
+                    productoAfterSell.getStock(),
+                    productoAfterSell.getProveedor()
             );
             publisherProducto.publisherStockRunningLow(event);
 

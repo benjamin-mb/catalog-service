@@ -21,3 +21,12 @@ spring:
     port: 5672
     username: arka
     password: arka123
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin123@localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30
+    eureka-server-connect-timeout-seconds: 10

@@ -1,24 +1,36 @@
 package com.arka.catalog_service.domain.useCase;
 
-import com.arka.catalog_service.domain.model.Categorias;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
+import com.arka.catalog_service.domain.useCase.DTO.CurrencyProduct;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
-public class GetterProductUseCase {
+public class GetterProductForDifferentCurrencyUseCase {
 
     private final ProductoGateway productoGateway;
 
-    public GetterProductUseCase(ProductoGateway productoGateway) {
+    public GetterProductForDifferentCurrencyUseCase(ProductoGateway productoGateway) {
         this.productoGateway = productoGateway;
     }
 
-    public Productos getById(Integer id){
-        return productoGateway.findById(id)
-                .orElseThrow(()->new EntityNotFoundException("product with id:"+id+" was not found"));
-
+    public CurrencyProduct getById(Integer id, Double currency){
+        Optional<Productos> producto =productoGateway.findById(id);
+        if (producto.isEmpty()){
+           throw new NotFoundException("producto no encontrado con id: "+ id);
+        }
+        if (producto.isPresent()) {
+            CurrencyProduct currencyProduct = new CurrencyProduct();
+            currencyProduct.setId(producto.get().getId());
+            currencyProduct.setNombre(producto.get().getNombre());
+            Double calculation= producto.get().getPrecio() * currency;
+            Integer priceCurrency=(int) Math.round(calculation);
+            currencyProduct.setPrecio(priceCurrency);
+            cu
+        }
     }
 
     public Productos getByNombre(String nombre){

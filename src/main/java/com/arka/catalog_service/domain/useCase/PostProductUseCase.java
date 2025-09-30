@@ -22,9 +22,7 @@ public class PostProductUseCase {
 
     public Productos create(Productos producto){
 
-        if (categoriaGateway.existsById(producto.getId())){
-            throw new IllegalArgumentException(producto.getId()+"is already register on another product");
-        }
+
 
         Categorias categoria=categoriaGateway.findById(producto.getCategoria())
                 .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria()));

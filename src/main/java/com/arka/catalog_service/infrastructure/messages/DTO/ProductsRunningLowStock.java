@@ -11,4 +11,5 @@ public class ProductsRunningLowStock {
     private Integer producto_id;
     private String nombre_producto;
     private Integer stock_Actual;
+    private Integer proveedor_id;
 }
