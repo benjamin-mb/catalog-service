@@ -21,14 +21,25 @@ public class CurrenciesService {
                 .uri("/e5711abb6046eaab04868f49/latest/COP")
                 .retrieve()
                 .body(Map.class);
-        if (response == null || response.containsKey("conversion_rates")){
+        if (response == null || !response.containsKey("conversion_rates")){
             throw  new RuntimeException("currencies could not be loaded");
         }
-        Map<String,Double>rates=(Map<String,Double>)response.get("conversion_rates");
-        Double USD = (Double) rates.get("USD");
-        Double CLP = (Double) rates.get("CLP");
-        Double PEN = (Double) rates.get("PEN");
+        Map<String, Object> rates = (Map<String, Object>) response.get("conversion_rates");
+
+        Double USD = convertToDouble(rates.get("USD"));
+        Double CLP = convertToDouble(rates.get("CLP"));
+        Double PEN = convertToDouble(rates.get("PEN"));
 
         return new CurrencyRates(USD,CLP,PEN);
+    }
+
+    private Double convertToDouble(Object value) {
+        if (value == null) {
+            return 0.0;
+        }
+        if (value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+        return Double.parseDouble(value.toString());
     }
 }
