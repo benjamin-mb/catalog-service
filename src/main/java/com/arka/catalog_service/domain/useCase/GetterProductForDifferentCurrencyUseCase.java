@@ -6,6 +6,7 @@ import com.arka.catalog_service.domain.useCase.DTO.CurrencyProduct;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.NotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,44 +20,111 @@ public class GetterProductForDifferentCurrencyUseCase {
 
     public CurrencyProduct getById(Integer id, Double currency){
         Optional<Productos> producto =productoGateway.findById(id);
+        CurrencyProduct currencyProduct = new CurrencyProduct();
         if (producto.isEmpty()){
            throw new NotFoundException("producto no encontrado con id: "+ id);
         }
         if (producto.isPresent()) {
-            CurrencyProduct currencyProduct = new CurrencyProduct();
             currencyProduct.setId(producto.get().getId());
             currencyProduct.setNombre(producto.get().getNombre());
             Double calculation= producto.get().getPrecio() * currency;
             Integer priceCurrency=(int) Math.round(calculation);
             currencyProduct.setPrecio(priceCurrency);
-            cu
+            currencyProduct.setStock(producto.get().getStock());
+            currencyProduct.setCaracteristicas(producto.get().getCaracteristicas());
+            currencyProduct.setMarca(producto.get().getMarca());
+            currencyProduct.setCategoria(producto.get().getCategoria());
+            currencyProduct.setProveedor(producto.get().getProveedor());
         }
+        return currencyProduct;
     }
 
-    public Productos getByNombre(String nombre){
-        return productoGateway.findByNombre(nombre)
-                .orElseThrow(()->new IllegalArgumentException("producto no encontrado con nombre: "+nombre));
-
+    public CurrencyProduct getByNombre(String nombre,Double currency){
+        Optional<Productos> producto =productoGateway.findByNombre(nombre);
+        CurrencyProduct currencyProduct = new CurrencyProduct();
+        if (producto.isEmpty()){
+            throw new NotFoundException("producto no encontrado con nombre: "+nombre);
+        }
+        if (producto.isPresent()) {
+            currencyProduct.setId(producto.get().getId());
+            currencyProduct.setNombre(producto.get().getNombre());
+            Double calculation= producto.get().getPrecio() * currency;
+            Integer priceCurrency=(int) Math.round(calculation);
+            currencyProduct.setPrecio(priceCurrency);
+            currencyProduct.setStock(producto.get().getStock());
+            currencyProduct.setCaracteristicas(producto.get().getCaracteristicas());
+            currencyProduct.setMarca(producto.get().getMarca());
+            currencyProduct.setCategoria(producto.get().getCategoria());
+            currencyProduct.setProveedor(producto.get().getProveedor());
+        }
+        return currencyProduct;
     }
 
-    public List<Productos> getByMarca(String marca){
+    public List<CurrencyProduct> getByMarca(String marca,Double currency){
         List<Productos> productoList=productoGateway.findAllByMarca(marca);
+        List<CurrencyProduct>newList=new ArrayList<>();
         if (productoList.isEmpty()){
-            throw new IllegalArgumentException("there are no products with that brand");
+            return new ArrayList<>();
         }
-        return  productoList;
+        for (Productos producto : productoList) {
+            CurrencyProduct currencyProduct = new CurrencyProduct();
+            currencyProduct.setId(producto.getId());
+            currencyProduct.setNombre(producto.getNombre());
+            Double calculation= producto.getPrecio() * currency;
+            Integer priceCurrency=(int) Math.round(calculation);
+            currencyProduct.setPrecio(priceCurrency);
+            currencyProduct.setStock(producto.getStock());
+            currencyProduct.setCaracteristicas(producto.getCaracteristicas());
+            currencyProduct.setMarca(producto.getMarca());
+            currencyProduct.setCategoria(producto.getCategoria());
+            currencyProduct.setProveedor(producto.getProveedor());
+            newList.add(currencyProduct);
+        }
+        return newList;
+
     }
 
-    public List<Productos> getByCategoria(Integer categoria){
+    public List<CurrencyProduct> getByCategoria(Integer categoria,Double currency){
         List<Productos> productoList=productoGateway.findAllByCategoria(categoria);
+        List<CurrencyProduct>newList=new ArrayList<>();
         if (productoList.isEmpty()){
-            throw new IllegalArgumentException("there are no products with that brand");
+            return new ArrayList<>();
         }
-        return  productoList;
+        for (Productos producto : productoList) {
+            CurrencyProduct currencyProduct = new CurrencyProduct();
+            currencyProduct.setId(producto.getId());
+            currencyProduct.setNombre(producto.getNombre());
+            Double calculation= producto.getPrecio() * currency;
+            Integer priceCurrency=(int) Math.round(calculation);
+            currencyProduct.setPrecio(priceCurrency);
+            currencyProduct.setStock(producto.getStock());
+            currencyProduct.setCaracteristicas(producto.getCaracteristicas());
+            currencyProduct.setMarca(producto.getMarca());
+            currencyProduct.setCategoria(producto.getCategoria());
+            currencyProduct.setProveedor(producto.getProveedor());
+            newList.add(currencyProduct);
+        }
+        return newList;
     }
 
-    public List<Productos>getAll(){
+    public List<CurrencyProduct>getAll(Double currency){
         List<Productos>productosList=productoGateway.findAll();
-        return productosList;
+        List<CurrencyProduct>newList=new ArrayList<>();
+        for (Productos producto : productosList) {
+            CurrencyProduct currencyProduct = new CurrencyProduct();
+            currencyProduct.setId(producto.getId());
+            currencyProduct.setNombre(producto.getNombre());
+            Double calculation= producto.getPrecio() * currency;
+            Integer priceCurrency=(int) Math.round(calculation);
+            currencyProduct.setPrecio(priceCurrency);
+            currencyProduct.setStock(producto.getStock());
+            currencyProduct.setCaracteristicas(producto.getCaracteristicas());
+            currencyProduct.setMarca(producto.getMarca());
+            currencyProduct.setCategoria(producto.getCategoria());
+            currencyProduct.setProveedor(producto.getProveedor());
+            newList.add(currencyProduct);
+        }
+        return newList;
+
     }
 }
