@@ -1,16 +1,13 @@
 package com.arka.catalog_service.infrastructure.controllers;
 
 import com.arka.catalog_service.domain.model.Productos;
-import com.arka.catalog_service.domain.useCase.DTO.CurrencyProduct;
+import com.arka.catalog_service.domain.model.DTO.CurrencyProduct;
 import com.arka.catalog_service.domain.useCase.GetterProductForDifferentCurrencyUseCase;
 import com.arka.catalog_service.domain.useCase.GetterProductUseCase;
 import com.arka.catalog_service.domain.useCase.PostProductUseCase;
 import com.arka.catalog_service.domain.useCase.UpdateDeleteProductoUseCase;
 import com.arka.catalog_service.infrastructure.adapters.Component.CurrenciesService;
 import com.arka.catalog_service.infrastructure.adapters.Component.Dto.CurrencyRates;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnCheckpointRestore;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,15 +2,14 @@ package com.arka.catalog_service.domain.useCase;
 
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
-import com.arka.catalog_service.infrastructure.messages.DTO.ProductsRunningLowStock;
-import com.arka.catalog_service.infrastructure.messages.PublisherProducto;
+import com.arka.catalog_service.domain.model.gateway.ProductoPublisherGateway;
 
 public class ReduceStockProductUseCase {
 
     private final ProductoGateway productoGateway;
-    private final PublisherProducto publisherProducto;
+    private final ProductoPublisherGateway publisherProducto;
 
-    public ReduceStockProductUseCase(ProductoGateway productoGateway, PublisherProducto publisherProducto) {
+    public ReduceStockProductUseCase(ProductoGateway productoGateway, ProductoPublisherGateway publisherProducto) {
         this.productoGateway = productoGateway;
         this.publisherProducto = publisherProducto;
     }
@@ -32,14 +31,7 @@ public class ReduceStockProductUseCase {
         Productos productoAfterSell=productoGateway.updateProduct(producto);
 
         if(productoAfterSell.getStock()<5){
-            ProductsRunningLowStock event = new ProductsRunningLowStock(
-                    productoAfterSell.getId(),
-                    productoAfterSell.getNombre(),
-                    productoAfterSell.getStock(),
-                    productoAfterSell.getProveedor()
-            );
-            publisherProducto.publisherStockRunningLow(event);
-
+            publisherProducto.publisherStockRunningLow(productoAfterSell);
         }
         return  productoAfterSell;
     }

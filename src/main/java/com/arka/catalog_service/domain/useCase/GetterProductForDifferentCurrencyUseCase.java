@@ -2,8 +2,7 @@ package com.arka.catalog_service.domain.useCase;
 
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
-import com.arka.catalog_service.domain.useCase.DTO.CurrencyProduct;
-import jakarta.persistence.EntityNotFoundException;
+import com.arka.catalog_service.domain.model.DTO.CurrencyProduct;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.ArrayList;

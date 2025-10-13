@@ -1,4 +1,4 @@
-package com.arka.catalog_service.domain.useCase.DTO;
+package com.arka.catalog_service.domain.model.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

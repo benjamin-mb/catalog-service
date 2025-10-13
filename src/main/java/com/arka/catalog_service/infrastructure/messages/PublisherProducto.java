@@ -1,7 +1,7 @@
 package com.arka.catalog_service.infrastructure.messages;
 
 import com.arka.catalog_service.infrastructure.config.RabbitMQConfig;
-import com.arka.catalog_service.infrastructure.messages.DTO.ProductsRunningLowStock;
+import com.arka.catalog_service.infrastructure.DTO.ProductsRunningLowStock;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 

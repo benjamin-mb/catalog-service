@@ -1,4 +1,4 @@
-package com.arka.catalog_service.infrastructure.messages.DTO;
+package com.arka.catalog_service.infrastructure.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
