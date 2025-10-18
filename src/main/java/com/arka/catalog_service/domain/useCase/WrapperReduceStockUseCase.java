@@ -4,11 +4,11 @@ import com.arka.catalog_service.domain.model.OrdenItem;
 
 import java.util.List;
 
-public class EnvolturaDeReduccionProductoUseCase {
+public class WrapperReduceStockUseCase {
 
     private final ReduceStockProductUseCase reduceStockProductUseCase;
 
-    public EnvolturaDeReduccionProductoUseCase(ReduceStockProductUseCase reduceStockProductUseCase) {
+    public WrapperReduceStockUseCase(ReduceStockProductUseCase reduceStockProductUseCase) {
         this.reduceStockProductUseCase = reduceStockProductUseCase;
     }
 

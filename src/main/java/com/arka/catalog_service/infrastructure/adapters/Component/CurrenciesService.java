@@ -1,6 +1,6 @@
 package com.arka.catalog_service.infrastructure.adapters.Component;
 
-import com.arka.catalog_service.infrastructure.adapters.Component.Dto.CurrencyRates;
+import com.arka.catalog_service.infrastructure.DTO.CurrencyRates;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;

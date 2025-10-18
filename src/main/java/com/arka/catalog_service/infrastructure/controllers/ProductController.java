@@ -7,7 +7,7 @@ import com.arka.catalog_service.domain.useCase.GetterProductUseCase;
 import com.arka.catalog_service.domain.useCase.PostProductUseCase;
 import com.arka.catalog_service.domain.useCase.UpdateDeleteProductoUseCase;
 import com.arka.catalog_service.infrastructure.adapters.Component.CurrenciesService;
-import com.arka.catalog_service.infrastructure.adapters.Component.Dto.CurrencyRates;
+import com.arka.catalog_service.infrastructure.DTO.CurrencyRates;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

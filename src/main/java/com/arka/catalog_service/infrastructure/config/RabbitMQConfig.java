@@ -34,7 +34,14 @@ public class RabbitMQConfig {
     public static final String NOTIFICATIONS_EXCHANGE = "notifications.exchange"; // donde publica catálogo
     public static final String STOCK_LOW_ROUTING_KEY = "stock.low";
 
-    //Exchange para órdenes (tipo Topic: enrutamiento flexible con patrones)
+    //Listener Orden Cancelada
+    public static final String ORDERS_CANCELLED_EXCHANGE="cancelled.exchange";
+    public static final String ORDERS_CANCELLED_ROUTING_KEY="cancelled.order";
+    public static final String ORDERS_CANCELLED_QUEUE="order.cancelled.inventory";
+    public static final String ORDER_CANCELLED_DLQ = "order.cancelled.inventory.dlq";
+
+
+    //Exchange para órdenes
     @Bean
     public TopicExchange ordersExchange() {
         return new TopicExchange(ORDERS_EXCHANGE);
@@ -65,7 +72,7 @@ public class RabbitMQConfig {
         return QueueBuilder.durable(ORDER_CREATED_DLQ).build();
     }
 
-    //Binding: conecta el exchange de órdenes con la cola
+    //Binding
     @Bean
     public Binding bindingOrderCreated(Queue orderCreatedQueue, TopicExchange ordersExchange) {
         return BindingBuilder.bind(orderCreatedQueue)
@@ -79,6 +86,34 @@ public class RabbitMQConfig {
                 .bind(orderCreatedDlq)
                 .to(orderCreatedDlx)
                 .with(ORDER_CREATED_ROUTING_KEY);
+    }
+
+    //Cnfig de order cancelled
+
+    @Bean
+    public TopicExchange ordersCancelledExchange() {
+        return new TopicExchange(ORDERS_CANCELLED_EXCHANGE);
+    }
+
+    @Bean
+    public Queue orderCancelledQueue() {
+        return QueueBuilder.durable(ORDERS_CANCELLED_QUEUE)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", ORDER_CANCELLED_DLQ)
+                .build();
+    }
+
+    @Bean
+    public Queue orderCancelledDLQ() {
+        return new Queue(ORDER_CANCELLED_DLQ, true);
+    }
+
+    @Bean
+    public Binding orderCancelledBinding() {
+        return BindingBuilder
+                .bind(orderCancelledQueue())
+                .to(ordersCancelledExchange())
+                .with(ORDERS_CANCELLED_ROUTING_KEY);
     }
 
     //Message converter
