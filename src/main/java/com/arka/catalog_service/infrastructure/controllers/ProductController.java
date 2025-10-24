@@ -1,5 +1,6 @@
 package com.arka.catalog_service.infrastructure.controllers;
 
+import com.arka.catalog_service.domain.model.DTO.ProductoCreateDto;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.DTO.CurrencyProduct;
 import com.arka.catalog_service.domain.useCase.GetterProductForDifferentCurrencyUseCase;
@@ -32,7 +33,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Productos>create(@RequestBody Productos producto){
+    public ResponseEntity<Productos>create(@RequestBody ProductoCreateDto producto){
         return ResponseEntity.ok(productUseCasePost.create(producto));
     }
 

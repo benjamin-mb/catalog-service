@@ -1,6 +1,7 @@
 package com.arka.catalog_service.domain.useCase;
 
 import com.arka.catalog_service.domain.model.Categorias;
+import com.arka.catalog_service.domain.model.DTO.ProductoCreateDto;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
@@ -20,7 +21,7 @@ public class PostProductUseCase {
         this.proveedorGateway = proveedorGateway;
     }
 
-    public Productos create(Productos producto){
+    public Productos create(ProductoCreateDto producto){
 
 
 
@@ -28,7 +29,7 @@ public class PostProductUseCase {
                 .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria()));
 
         if(productoGateway.existsByNombreAndCategoria(producto.getNombre(),producto.getCategoria())){
-            throw new IllegalArgumentException("the user already exists on the category"+producto.getCategoria());
+            throw new IllegalArgumentException("the product already exists on the category"+producto.getCategoria());
 
         }
 
@@ -45,7 +46,7 @@ public class PostProductUseCase {
         }
 
         if (producto.getCaracteristicas().isBlank() || producto.getCaracteristicas()==null){
-            throw new IllegalArgumentException("carecteristicas field can not be blank");
+            throw new IllegalArgumentException("caracteristics field can not be blank");
         }
 
         if (producto.getMarca().isBlank() || producto.getMarca()==null){
@@ -56,8 +57,17 @@ public class PostProductUseCase {
         if (!proveedorGateway.existsById(producto.getProveedor())){
             throw new IllegalArgumentException("proveedor with id"+ producto.getProveedor()+" has not been found");
         }
+        Productos productoEntity=new Productos(
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getStock(),
+                producto.getCaracteristicas(),
+                producto.getMarca(),
+                producto.getCategoria(),
+                producto.getProveedor()
+        );
 
-        return productoGateway.save(producto);
+        return productoGateway.save(productoEntity);
 
     }
 }

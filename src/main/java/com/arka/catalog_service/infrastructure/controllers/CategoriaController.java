@@ -1,6 +1,7 @@
 package com.arka.catalog_service.infrastructure.controllers;
 
 import com.arka.catalog_service.domain.model.Categorias;
+import com.arka.catalog_service.domain.model.DTO.CategoriaCreateDto;
 import com.arka.catalog_service.domain.useCase.GetterCategoriaUseCase;
 import com.arka.catalog_service.domain.useCase.PostCategoriaUseCase;
 import com.arka.catalog_service.domain.useCase.UpdateDeleteCategoriaUseCase;
@@ -49,7 +50,7 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Categorias> create(@RequestBody Categorias categoria) {
+    public ResponseEntity<Categorias> create(@RequestBody CategoriaCreateDto categoria) {
         Categorias created = postCategoriaUseCase.create(categoria);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }

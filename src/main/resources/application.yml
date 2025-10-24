@@ -6,7 +6,7 @@ spring:
     name:  catalogo-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/sistema_almacen?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/arka?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: Developer123.
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -33,3 +33,9 @@ eureka:
     fetch-registry: true
     registry-fetch-interval-seconds: 30
     eureka-server-connect-timeout-seconds: 10
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

@@ -1,6 +1,7 @@
 package com.arka.catalog_service.domain.useCase;
 
 import com.arka.catalog_service.domain.model.Categorias;
+import com.arka.catalog_service.domain.model.DTO.CategoriaCreateDto;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 
 import java.util.HashSet;
@@ -14,7 +15,7 @@ public class PostCategoriaUseCase {
         this.categoriaGateway = categoriaGateway;
     }
 
-    public Categorias create(Categorias categoria){
+    public Categorias create(CategoriaCreateDto categoria){
         if (categoria.getNombre()==null || categoria.getNombre().isBlank()){
             throw new IllegalArgumentException("nombre is obligatory");
         }
@@ -35,6 +36,11 @@ public class PostCategoriaUseCase {
         categoria.setCaracteristicas(categoria.getCaracteristicas().trim());
         categoria.setTipo(categoria.getTipo().trim());
 
-        return categoriaGateway.create(categoria);
+        Categorias categoriaEntity=new Categorias(
+                categoria.getNombre(),
+                categoria.getCaracteristicas(),
+                categoria.getTipo()
+        );
+        return categoriaGateway.create(categoriaEntity);
     }
 }
