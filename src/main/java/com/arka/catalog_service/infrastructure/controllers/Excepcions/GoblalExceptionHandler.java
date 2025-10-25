@@ -1,16 +1,18 @@
-package com.arka.catalog_service.domain.model.GlobalExceptions;
+package com.arka.catalog_service.infrastructure.controllers.Excepcions;
 
+import com.arka.catalog_service.domain.model.GlobalExceptions.CategoriaNotFoundExceptions;
+import com.arka.catalog_service.domain.model.GlobalExceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
+@RestControllerAdvice(basePackages = "com.arka.catalog_service.infrastructure.controller")
 public class GoblalExceptionHandler {
 
     @ExceptionHandler({

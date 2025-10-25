@@ -1,4 +1,4 @@
-package com.arka.catalog_service.domain.model.GlobalExceptions;
+package com.arka.catalog_service.infrastructure.controllers.Excepcions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
