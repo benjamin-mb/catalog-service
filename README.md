@@ -762,17 +762,7 @@ docker run -p 8082:8082 catalog-service
 - `RABBITMQ_PORT`
 - `RABBITMQ_USER`
 - `RABBITMQ_PASSWORD`
-
----
-
-## 📞 Soporte
-
-Para preguntas o problemas:
-- **Email:** soporte@arka.com
-- **Documentación API:** http://localhost:8082/swagger-ui.html
-
----
-
+  
 ## 📝 Notas Adicionales
 
 ### Dependencias con Otros Servicios:
