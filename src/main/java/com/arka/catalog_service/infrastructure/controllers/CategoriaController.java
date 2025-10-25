@@ -56,9 +56,8 @@ public class CategoriaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categorias> update(@PathVariable Integer id, @RequestBody Categorias categoria) {
-        categoria.setId(id);
-        return ResponseEntity.ok(updateDeleteCategoriaUseCase.update(categoria));
+    public ResponseEntity<Categorias> update(@PathVariable Integer id, @RequestBody CategoriaCreateDto categoria) {
+        return ResponseEntity.ok(updateDeleteCategoriaUseCase.update(categoria,id));
     }
 
     @DeleteMapping("/{id}")

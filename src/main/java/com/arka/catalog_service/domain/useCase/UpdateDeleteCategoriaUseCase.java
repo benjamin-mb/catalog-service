@@ -1,6 +1,7 @@
 package com.arka.catalog_service.domain.useCase;
 
 import com.arka.catalog_service.domain.model.Categorias;
+import com.arka.catalog_service.domain.model.DTO.CategoriaCreateDto;
 import com.arka.catalog_service.domain.model.GlobalExceptions.CategoriaNotFoundExceptions;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 
@@ -12,9 +13,9 @@ public class UpdateDeleteCategoriaUseCase {
         this.categoriaGateway = categoriaGateway;
     }
 
-    public Categorias update(Categorias categoria){
-        Categorias categoriaUpdated=categoriaGateway.findById(categoria.getId())
-                .orElseThrow(()->new CategoriaNotFoundExceptions("category not found by id"+categoria.getId()));
+    public Categorias update(CategoriaCreateDto categoria, Integer idCategoria){
+        Categorias categoriaUpdated=categoriaGateway.findById(idCategoria)
+                .orElseThrow(()->new CategoriaNotFoundExceptions("category not found by id"+idCategoria));
 
         if (categoria.getNombre() != null){
             String nuevoNombre = categoria.getNombre().trim();

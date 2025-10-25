@@ -33,7 +33,7 @@ public class PostProductUseCase {
 
         }
 
-        if (producto.getStock()<0){
+        if (producto.getStock()<=0){
             throw new IllegalArgumentException("the stock can't be below 0");
         }
 

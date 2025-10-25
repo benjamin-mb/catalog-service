@@ -25,6 +25,7 @@ public class CategoriaMapper {
         categoriaEntity.setNombre(categoria.getNombre());
         categoriaEntity.setCaracteristicas(categoria.getCaracteristicas());
         categoriaEntity.setTipo(categoria.getTipo());
+        categoriaEntity.setId(categoria.getId());
         return categoriaEntity;
     }
 }
