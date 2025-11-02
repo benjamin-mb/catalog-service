@@ -1,5 +1,6 @@
 package com.arka.catalog_service.domain.useCase;
 
+import com.arka.catalog_service.domain.model.GlobalExceptions.ProductNotFoundException;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
 import com.arka.catalog_service.domain.model.gateway.ProductoPublisherGateway;
@@ -21,7 +22,7 @@ public class ReduceStockProductUseCase {
         }
 
         Productos producto=productoGateway.findById(productoId)
-                .orElseThrow(()->new IllegalArgumentException("product not found with id"+productoId));
+                .orElseThrow(()->new ProductNotFoundException("product not found with id"+productoId));
 
         if (producto.getStock()==null||producto.getStock()<cantidad){
             throw new IllegalArgumentException("There is no stock available on this product");

@@ -33,7 +33,7 @@ public class PostProductUseCase {
 
         }
 
-        if (producto.getStock()<=0){
+        if (producto.getStock()<=5){
             throw new IllegalArgumentException("the stock can't be below 0");
         }
 
@@ -68,6 +68,11 @@ public class PostProductUseCase {
         );
 
         return productoGateway.save(productoEntity);
-
     }
+
+//    =========================
+//         CASOS DE ERROR
+//    =========================
+
+
 }
