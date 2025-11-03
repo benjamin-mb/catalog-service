@@ -3,6 +3,7 @@ package com.arka.catalog_service.domain.useCase;
 import com.arka.catalog_service.domain.model.Categorias;
 import com.arka.catalog_service.domain.model.GlobalExceptions.CategoriaNotFoundExceptions;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class GetterCategoriaUseCase {
     public Categorias getById(Integer id){
 
         Categorias categoria=categoriaGateway.findById(id)
-                .orElseThrow((()->new IllegalArgumentException("no category has been found with id "+id)));
+                .orElseThrow((()->new EntityNotFoundException("no category has been found with id "+id)));
 
         return categoria;
     }
@@ -35,7 +36,7 @@ public class GetterCategoriaUseCase {
 
         List<Categorias> categorias=categoriaGateway.findAllByTipo(tipoLimpio);
         if (categorias.isEmpty()){
-            throw  new IllegalArgumentException("there are no categories with that tipo");
+            throw  new CategoriaNotFoundExceptions("there are no categories with that tipo");
         }
 
         return categorias;

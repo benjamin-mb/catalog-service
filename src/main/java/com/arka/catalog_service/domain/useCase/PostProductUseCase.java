@@ -23,8 +23,6 @@ public class PostProductUseCase {
 
     public Productos create(ProductoCreateDto producto){
 
-
-
         Categorias categoria=categoriaGateway.findById(producto.getCategoria())
                 .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria()));
 
@@ -69,10 +67,5 @@ public class PostProductUseCase {
 
         return productoGateway.save(productoEntity);
     }
-
-//    =========================
-//         CASOS DE ERROR
-//    =========================
-
 
 }

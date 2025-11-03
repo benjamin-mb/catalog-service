@@ -23,14 +23,14 @@ public class GetterProductUseCase {
 
     public Productos getByNombre(String nombre){
         return productoGateway.findByNombre(nombre)
-                .orElseThrow(()->new IllegalArgumentException("producto no encontrado con nombre: "+nombre));
+                .orElseThrow(()->new EntityNotFoundException("producto no encontrado con nombre: "+nombre));
 
     }
 
     public List<Productos> getByMarca(String marca){
         List<Productos> productoList=productoGateway.findAllByMarca(marca);
         if (productoList.isEmpty()){
-            throw new IllegalArgumentException("there are no products with that brand");
+            throw new EntityNotFoundException("there are no products with that brand");
         }
         return  productoList;
     }
@@ -38,7 +38,7 @@ public class GetterProductUseCase {
     public List<Productos> getByCategoria(Integer categoria){
         List<Productos> productoList=productoGateway.findAllByCategoria(categoria);
         if (productoList.isEmpty()){
-            throw new IllegalArgumentException("there are no products with that brand");
+            throw new EntityNotFoundException("there are no products with that category");
         }
         return  productoList;
     }

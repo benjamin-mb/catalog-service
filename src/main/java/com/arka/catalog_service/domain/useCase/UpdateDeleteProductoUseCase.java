@@ -3,6 +3,7 @@ package com.arka.catalog_service.domain.useCase;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
+import jakarta.persistence.EntityNotFoundException;
 
 public class UpdateDeleteProductoUseCase {
 
@@ -17,7 +18,7 @@ public class UpdateDeleteProductoUseCase {
     public Productos update (Productos producto){
 
         Productos productoExiste=productoGateway.findById(producto.getId())
-                .orElseThrow(()->new IllegalArgumentException("No product has been found with id:"+producto.getId()));
+                .orElseThrow(()->new EntityNotFoundException("No product has been found with id:"+producto.getId()));
 
         if (producto.getNombre() != null) {
             productoExiste.setNombre(producto.getNombre());
@@ -26,13 +27,13 @@ public class UpdateDeleteProductoUseCase {
             productoExiste.setMarca(producto.getMarca());
         }
         if (producto.getPrecio() != null) {
-            if (producto.getPrecio() < 0) {
+            if (producto.getPrecio() < 1) {
                 throw new IllegalArgumentException("price can't be negative");
             }
             productoExiste.setPrecio(producto.getPrecio());
         }
         if (producto.getStock() != null) {
-            if (producto.getStock() < 0) {
+            if (producto.getStock() < 1) {
                 throw new IllegalArgumentException("stock can't be negative");
             }
             productoExiste.setStock(producto.getStock());
@@ -42,7 +43,7 @@ public class UpdateDeleteProductoUseCase {
                 productoExiste.setCategoria(producto.getCategoria());
             }
             else {
-                throw new IllegalArgumentException("category id" + producto.getCategoria() + "do not exist");
+                throw new EntityNotFoundException("category id" + producto.getCategoria() + "do not exist");
             }
         }
 
@@ -52,7 +53,7 @@ public class UpdateDeleteProductoUseCase {
     public Productos delete(Integer id){
 
         Productos productoEliminar=productoGateway.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("No product has been found with id:"+id));
+                .orElseThrow(()->new EntityNotFoundException("No product has been found with id:"+id));
 
         productoGateway.deleteById(id);
         return productoEliminar;
