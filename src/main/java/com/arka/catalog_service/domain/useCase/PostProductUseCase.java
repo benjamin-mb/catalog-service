@@ -2,6 +2,8 @@ package com.arka.catalog_service.domain.useCase;
 
 import com.arka.catalog_service.domain.model.Categorias;
 import com.arka.catalog_service.domain.model.DTO.ProductoCreateDto;
+import com.arka.catalog_service.domain.model.GlobalExceptions.CategoriaNotFoundExceptions;
+import com.arka.catalog_service.domain.model.GlobalExceptions.ProveedorNotFoundException;
 import com.arka.catalog_service.domain.model.Productos;
 import com.arka.catalog_service.domain.model.gateway.CategoriaGateway;
 import com.arka.catalog_service.domain.model.gateway.ProductoGateway;
@@ -24,7 +26,7 @@ public class PostProductUseCase {
     public Productos create(ProductoCreateDto producto){
 
         Categorias categoria=categoriaGateway.findById(producto.getCategoria())
-                .orElseThrow(()->new IllegalArgumentException("la categoria"+ producto.getCategoria()));
+                .orElseThrow(()->new CategoriaNotFoundExceptions("la categoria"+ producto.getCategoria()));
 
         if(productoGateway.existsByNombreAndCategoria(producto.getNombre(),producto.getCategoria())){
             throw new IllegalArgumentException("the product already exists on the category"+producto.getCategoria());
@@ -53,7 +55,7 @@ public class PostProductUseCase {
 
 
         if (!proveedorGateway.existsById(producto.getProveedor())){
-            throw new IllegalArgumentException("proveedor with id"+ producto.getProveedor()+" has not been found");
+            throw new ProveedorNotFoundException("proveedor with id"+ producto.getProveedor()+" has not been found");
         }
         Productos productoEntity=new Productos(
                 producto.getNombre(),
