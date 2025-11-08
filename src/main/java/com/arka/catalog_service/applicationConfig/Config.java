@@ -9,7 +9,8 @@ import org.springframework.context.annotation.FilterType;
         "com.arka.catalog_service.domain.useCase",
         "com.arka.catalog_service.infrastructure.adapters.repository",
         "com.arka.catalog_service.infrastructure.adapters.mapper",
-        "com.arka.catalog_service.infrastructure.controllers"
+        "com.arka.catalog_service.infrastructure.controllers",
+        "com.arka.catalog_service.infrastructure.controllers.Excepcions"
 },
         includeFilters = {
                 @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*UseCase$")
