@@ -1,6 +1,7 @@
 package com.arka.catalog_service.infrastructure.adapters.Component;
 
 import com.arka.catalog_service.infrastructure.DTO.CurrencyRates;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -12,13 +13,17 @@ public class CurrenciesService {
 
     private  final RestClient restClient;
 
+    @Value("${exchangerate.api.key}")
+    private String apiKey;
+
     public CurrenciesService(RestClient restClient) {
         this.restClient = restClient;
     }
+
     @Cacheable(value = "currencies", key = "'rates'")
     public CurrencyRates getCurrencies(){
         Map<String,Object>response= restClient.get()
-                .uri("/e5711abb6046eaab04868f49/latest/COP")
+                .uri("/{apiKey}/latest/COP", apiKey)
                 .retrieve()
                 .body(Map.class);
         if (response == null || !response.containsKey("conversion_rates")){
@@ -35,7 +40,7 @@ public class CurrenciesService {
 
     private Double convertToDouble(Object value) {
         if (value == null) {
-            return 0.0;
+            return 1.0;
         }
         if (value instanceof Number) {
             return ((Number) value).doubleValue();

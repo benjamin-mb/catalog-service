@@ -14,6 +14,12 @@ spring:
     username: arka
     password: arka123
 
+exchangerate:
+  api:
+    key: ${EXCHANGERATE_API_KEY}
+    base-url: ${EXCHANGERATE_BASE_URL:https://v6.exchangerate-api.com/v6}
+    timeout: ${EXCHANGERATE_TIMEOUT:60}
+
 management:
   endpoints:
     web:

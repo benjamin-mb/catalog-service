@@ -1,3 +1,9 @@
+exchangerate:
+  api:
+    key: e5711abb6046eaab04868f49
+    base-url: https://v6.exchangerate-api.com/v6
+    timeout: 60
+
 spring:
   rabbitmq:
     host: localhost

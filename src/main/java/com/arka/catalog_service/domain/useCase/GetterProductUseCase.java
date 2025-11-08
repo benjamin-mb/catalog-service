@@ -22,13 +22,15 @@ public class GetterProductUseCase {
     }
 
     public Productos getByNombre(String nombre){
-        return productoGateway.findByNombre(nombre)
+        String nombreTrim=nombre.trim();
+        return productoGateway.findByNombre(nombreTrim)
                 .orElseThrow(()->new EntityNotFoundException("producto no encontrado con nombre: "+nombre));
 
     }
 
     public List<Productos> getByMarca(String marca){
-        List<Productos> productoList=productoGateway.findAllByMarca(marca);
+        String marcaTrim=marca.trim();
+        List<Productos> productoList=productoGateway.findAllByMarca(marcaTrim);
         if (productoList.isEmpty()){
             throw new EntityNotFoundException("there are no products with that brand");
         }

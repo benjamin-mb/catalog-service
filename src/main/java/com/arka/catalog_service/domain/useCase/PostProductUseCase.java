@@ -26,7 +26,7 @@ public class PostProductUseCase {
     public Productos create(ProductoCreateDto producto){
 
         Categorias categoria=categoriaGateway.findById(producto.getCategoria())
-                .orElseThrow(()->new CategoriaNotFoundExceptions("la categoria"+ producto.getCategoria()));
+                .orElseThrow(()->new CategoriaNotFoundExceptions("the category "+ producto.getCategoria() + "was not found"));
 
         if(productoGateway.existsByNombreAndCategoria(producto.getNombre(),producto.getCategoria())){
             throw new IllegalArgumentException("the product already exists on the category"+producto.getCategoria());
